@@ -1,0 +1,122 @@
+#include<stdio.h>
+#include<conio.h>
+
+int main(){
+	int x,y,c=0,a,b,d,e,f,g;
+	FILE *file;
+	file=fopen("teste.txt", "w");
+	for(x=1; x<=4; x++)
+		for(y=1;y<=4;y++){
+			if(x==y)
+			{
+			fprintf(file,"(%i,%i) I S\n",x,y);
+			}
+			else 
+			{
+			fprintf(file,"(%i,%i) I\n",x,y);
+			}
+		}
+	for(x=1;x<5;x++)
+		for(y=1;y<5;y++)
+			for(a=1;a<5;a++)
+				for(b=1;b<5;b++)
+			{
+					if(x==a && y==b)
+						b++;
+					if(b==5)
+					break;
+					if(a==x && b==y){
+					fprintf(file,"(%i,%i)(%i,%i) I S",x,y,a,b);
+				}
+					else{
+						fprintf(file,"(%i,%i)(%i,%i) I",x,y,a,b);
+					}
+				if(y==b)
+					{
+					fprintf(file," T\n");
+					}
+				else
+				{
+					fprintf(file, "\n");
+				}
+			}
+	for(x=1;x<5;x++)
+		for(y=1;y<5;y++)
+			for(a=1;a<5;a++)
+				for(b=1;b<5;b++)
+					for(d=1;d<5;d++)
+						for(e=1;e<5;e++)
+				{
+					if(x==a && y==b)
+						b++;
+					if(y==5)
+						break;
+					if(x==d && y==e)
+						e++;
+					if(e==5)
+						break;
+					if(a==d && b==e)
+						e++;
+					if(e==5)
+						break;
+					fprintf(file,"(%i,%i) (%i,%i) (%i,%i) ",x,y,a,b,d,e);
+					if(b==x || y==a || y==c || x==d)
+						fprintf(file,"I S ");
+					else
+					fprintf(file,"I ");
+					if(x==a && d==y)
+						fprintf(file,"T \n");
+					else if(c==a && y==b)
+						fprintf(file,"T\n");
+					else if(a==c && y==d)
+						fprintf(file,"T\n");
+					else
+						fprintf(file,"\n");
+					}
+	for(x=1;x<5;x++)
+		for(y=1;y<5;y++)
+			for(a=1;a<5;a++)
+				for(b=1;b<5;b++)
+					for(d=1;d<5;d++)
+						for(e=1;e<5;e++)
+							for(f=1;f<5;f++)
+								for(g=1;g<5;g++)
+								{
+									if(x==a && y==b)
+									b++;
+									if(b==5)
+									break;
+									if(x==f && y==g)
+									g++;
+									if(g==5)
+									break;
+								
+									fprintf(file,"(%i,%i) (%i,%i) (%i,%i) (%i,%i)", x,y,a,b,d,e,f,g);
+								if(x&b==b && y&a==a || x&b==e && y&d==d || x&g==g && y&f==f || a&y==y && b&x==b || a&e==e && b&d==d || a&g==g && a&f==f || d&y==y && e&x==x || d&b==b && e&a==a || d&g==g && e&f==f || f&y==y && g&x==x || f&b==b && g&a==a || f&e==e && g&d==d)
+								{
+								fprintf(file,"S");
+								c++;
+								}
+								if(x==d && e==b || x==f && g==b || x==a && e==b ||x==f && e==g || x==a && g==b || x==d && g==e || a==f && e==g || a==d && g==e || d==x && g==y || d==a && g==b || f==x && b==y)
+								{
+								fprintf(file,"T");
+								c++;
+								}
+								else
+								{
+									fprintf(file,"I");
+									c++;
+								}
+								if(x&y==y && a&b==b && c&d==d && e&f==f && a!=b && a!=c && a!=f && b!=c && b!=f && c!=e)
+								{
+								fprintf(file,"R");
+								c++;
+								}
+								if(c&3==3)
+								fprintf(file,"E");
+								fprintf(file,"\n");	
+								c=0;
+								}
+	fclose(file);
+	return 0;
+}
